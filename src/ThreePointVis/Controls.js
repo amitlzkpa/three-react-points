@@ -24,14 +24,14 @@ const Controls = ({}, ref) => {
     resetCamera: () => {
       // reset look-at (target) and camera position
       controls.current.target.set(0, 0, 0);
-      camera.position.set(0, 0, 80);
+      // camera.position.set(0, 0, 80);
 
       // needed for trackball controls, reset the up vector
-      camera.up.set(
-        controls.current.up0.x,
-        controls.current.up0.y,
-        controls.current.up0.z
-      );
+      // camera.up.set(
+      //   controls.current.up0.x,
+      //   controls.current.up0.y,
+      //   controls.current.up0.z
+      // );
     },
   }));
 
@@ -45,11 +45,6 @@ const Controls = ({}, ref) => {
         CTRL_KEY, // zoom
         CMD_KEY, // pan
       ]}
-      mouseButtons={{
-        LEFT: THREE.MOUSE.PAN, // make pan the default instead of rotate
-        MIDDLE: THREE.MOUSE.ZOOM,
-        RIGHT: THREE.MOUSE.ROTATE,
-      }}
     />
   );
 };
