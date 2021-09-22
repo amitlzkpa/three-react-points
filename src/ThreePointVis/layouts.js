@@ -1,83 +1,8 @@
 import * as React from 'react';
 import { useSpring } from 'react-spring/three';
-import * as THREE from 'three';
-
-let STATE = {
-  isEvaluating: true,
-  resolution: 8000,
-  sideLen: 30,
-};
-
-function gridLayout(data) {
-  const numPoints = data.length;
-  const numCols = Math.ceil(Math.sqrt(numPoints));
-  const numRows = numCols;
-
-  for (let i = 0; i < numPoints; ++i) {
-    const datum = data[i];
-    const col = (i % numCols) - numCols / 2;
-    const row = Math.floor(i / numCols) - numRows / 2;
-
-    datum.x = col * 1.05;
-    datum.y = row * 1.05;
-    datum.z = 0;
-
-    datum.scaleX = 1;
-    datum.scaleY = 1;
-    datum.scaleZ = 1;
-  }
-}
-
-function spiralLayout(data) {
-  // equidistant points on a spiral
-  let theta = 0;
-  for (let i = 0; i < data.length; ++i) {
-    const datum = data[i];
-    const radius = Math.max(1, Math.sqrt(i + 1) * 0.8);
-    theta += Math.asin(1 / radius) * 1;
-
-    datum.x = radius * Math.cos(theta);
-    datum.y = radius * Math.sin(theta);
-    datum.z = 0;
-
-    datum.scaleX = 1;
-    datum.scaleY = 1;
-    datum.scaleZ = 1;
-  }
-}
-
-function solidSphereLayout(data) {
-  function evaluateFunction(datum) {
-    // TODO: evaluate here
-  }
-
-  // points in a 3d grid
-  STATE.resolution = Math.floor(Math.cbrt(data.length));
-  let idx = 0;
-  for (let i = 0; i < STATE.resolution; i++) {
-    for (let j = 0; j < STATE.resolution; j++) {
-      for (let k = 0; k < STATE.resolution; k++) {
-        let datum = data[idx];
-        if (STATE.isEvaluating) {
-          datum.x = (i / STATE.resolution - 0.5) * STATE.sideLen;
-          datum.y = (j / STATE.resolution - 0.5) * STATE.sideLen;
-          datum.z = (k / STATE.resolution - 0.5) * STATE.sideLen;
-
-          evaluateFunction(datum);
-
-          let d = new THREE.Vector3(datum.x, datum.y, datum.z).distanceTo(
-            new THREE.Vector3()
-          );
-          let val = d < 10 ? 4 : 0.4;
-          datum.scaleX = val;
-          datum.scaleY = val;
-          datum.scaleZ = val;
-        }
-        idx++;
-      }
-    }
-  }
-}
+import gridLayout from './GridLayout';
+import spiralLayout from './SpiralLayout';
+import solidSphereLayout from './SolidSphereLayout';
 
 // ----------------------------------------------------------------------------
 
