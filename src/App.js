@@ -13,6 +13,8 @@ export default function App() {
     visRef.current.resetCamera();
   };
 
+  //
+
   return (
     <div className="App">
       <div className="vis-container">
@@ -28,7 +30,8 @@ export default function App() {
         Reset Camera
       </button>
       <div className="controls">
-        <strong>Layouts</strong>{' '}
+        <strong>Layouts</strong>
+        <br />
         <button
           onClick={() => setLayout('grid')}
           className={layout === 'grid' ? 'active' : undefined}
@@ -42,14 +45,18 @@ export default function App() {
           Spiral
         </button>
         <button
-          onClick={() => setLayout('new')}
-          className={layout === 'new' ? 'active' : undefined}
+          onClick={() => setLayout('solid-sphere')}
+          className={layout === 'solid-sphere' ? 'active' : undefined}
         >
-          New
+          Solid Sphere
         </button>
+        <hr />
         {selectedPoint && (
           <div className="selected-point">
-            You selected <strong>{selectedPoint.id}</strong>
+            <strong>
+              ({selectedPoint.x.toFixed(2)},{selectedPoint.y.toFixed(2)},
+              {selectedPoint.z.toFixed(2)})
+            </strong>
           </div>
         )}
       </div>

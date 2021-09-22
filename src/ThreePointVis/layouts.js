@@ -5,7 +5,7 @@ import * as THREE from 'three';
 let STATE = {
   isEvaluating: true,
   resolution: 8000,
-  sideLen: 50,
+  sideLen: 30,
 };
 
 function gridLayout(data) {
@@ -46,7 +46,7 @@ function spiralLayout(data) {
   }
 }
 
-function newLayout(data) {
+function solidSphereLayout(data) {
   function evaluateFunction(datum) {
     // TODO: evaluate here
   }
@@ -68,7 +68,7 @@ function newLayout(data) {
           let d = new THREE.Vector3(datum.x, datum.y, datum.z).distanceTo(
             new THREE.Vector3()
           );
-          let val = d < 10 ? 4 : 1;
+          let val = d < 10 ? 4 : 0.4;
           datum.scaleX = val;
           datum.scaleY = val;
           datum.scaleZ = val;
@@ -79,14 +79,16 @@ function newLayout(data) {
   }
 }
 
+// ----------------------------------------------------------------------------
+
 export const useLayout = ({ data, layout = 'grid' }) => {
   React.useEffect(() => {
     switch (layout) {
       case 'spiral':
         spiralLayout(data);
         break;
-      case 'new':
-        newLayout(data);
+      case 'solid-sphere':
+        solidSphereLayout(data);
         break;
       case 'grid':
       default: {
@@ -152,3 +154,5 @@ export function useAnimatedLayout({ data, layout, onFrame }) {
 
   return animProps;
 }
+
+// ----------------------------------------------------------------------------
