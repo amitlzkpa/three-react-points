@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+// import * as THREE from 'three';
 
 let STATE = {
   isEvaluating: true,
@@ -6,9 +6,12 @@ let STATE = {
   sideLen: 30,
 };
 
-export default function solidSphereLayout(data) {
+export default function (data) {
   function evaluateFunction(datum) {
-    // TODO: evaluate here
+    datum.d = 0;
+    datum.d = Math.sqrt(
+      Math.pow(datum.x, 2) + Math.pow(datum.y, 2) + Math.pow(datum.z, 2)
+    );
   }
 
   // points in a 3d grid
@@ -25,10 +28,7 @@ export default function solidSphereLayout(data) {
 
           evaluateFunction(datum);
 
-          let d = new THREE.Vector3(datum.x, datum.y, datum.z).distanceTo(
-            new THREE.Vector3()
-          );
-          let val = d < 10 ? 4 : 0.4;
+          let val = datum.d < 10 ? 4 : 0.4;
           datum.scaleX = val;
           datum.scaleY = val;
           datum.scaleZ = val;

@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { useSpring } from 'react-spring/three';
-import gridLayout from './GridLayout';
-import spiralLayout from './SpiralLayout';
-import solidSphereLayout from './SolidSphereLayout';
+import gridLayout from './Layouts/GridLayout';
+import spiralLayout from './Layouts/SpiralLayout';
+import solidSphereLayout from './Layouts/SolidSphereLayout';
+import ellipsoidLayout from './Layouts/EllipsoidLayout';
+import hyperboloidOneLayout from './Layouts/HyperboloidOneLayout';
+import hyperbolicParaboloidLayout from './Layouts/HyperbolicParaboloidLayout';
 
 // ----------------------------------------------------------------------------
 
@@ -15,6 +18,15 @@ export const useLayout = ({ data, layout = 'grid' }) => {
       case 'solid-sphere':
         solidSphereLayout(data);
         break;
+      case 'ellipsoid':
+        ellipsoidLayout(data);
+        break;
+      case 'hyperboloid-1':
+        hyperboloidOneLayout(data);
+        break;
+      case 'hyperbolic-paraboloid':
+        hyperbolicParaboloidLayout(data);
+        break;
       case 'grid':
       default: {
         gridLayout(data);
@@ -26,6 +38,7 @@ export const useLayout = ({ data, layout = 'grid' }) => {
 function useSourceTargetLayout({ data, layout }) {
   // prep for new animation by storing source
   React.useEffect(() => {
+    console.log(data[0]);
     for (let i = 0; i < data.length; ++i) {
       data[i].sourceX = data[i].x || 0;
       data[i].sourceY = data[i].y || 0;

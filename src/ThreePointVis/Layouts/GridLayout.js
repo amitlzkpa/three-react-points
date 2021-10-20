@@ -1,4 +1,4 @@
-export default function gridLayout(data) {
+export default function (data) {
   const numPoints = data.length;
   const numCols = Math.ceil(Math.sqrt(numPoints));
   const numRows = numCols;

@@ -50,6 +50,24 @@ export default function App() {
         >
           Solid Sphere
         </button>
+        <button
+          onClick={() => setLayout('ellipsoid')}
+          className={layout === 'ellipsoid' ? 'active' : undefined}
+        >
+          Ellipsoid
+        </button>
+        <button
+          onClick={() => setLayout('hyperboloid-1')}
+          className={layout === 'hyperboloid-1' ? 'active' : undefined}
+        >
+          Hyperboloid 1
+        </button>
+        <button
+          onClick={() => setLayout('hyperbolic-paraboloid')}
+          className={layout === 'hyperbolic-paraboloid' ? 'active' : undefined}
+        >
+          Hyperbolic Paraboloid
+        </button>
         <hr />
         {selectedPoint && (
           <div className="selected-point">

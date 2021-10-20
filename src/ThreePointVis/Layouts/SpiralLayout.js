@@ -1,4 +1,4 @@
-export default function spiralLayout(data) {
+export default function (data) {
   // equidistant points on a spiral
   let theta = 0;
   for (let i = 0; i < data.length; ++i) {
